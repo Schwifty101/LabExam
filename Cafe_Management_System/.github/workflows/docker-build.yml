@@ -1,0 +1,59 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: schwifty101
+        password: dckr_pat_YKkUz2adbBDDbUYjq32CcvaeF1A
+
+    - name: Build and push menu-service image
+      uses: docker/build-push-action@v4
+      with:
+        context: ./menu-services
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: schwifty101/cafe-menu-service:latest
+
+    - name: Build and push order-service image
+      uses: docker/build-push-action@v4
+      with:
+        context: ./order-services
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: schwifty101/cafe-order-service:latest
+
+    - name: Build and push payment-service image
+      uses: docker/build-push-action@v4
+      with:
+        context: ./payment-services
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: schwifty101/cafe-payment-service:latest
+
+    - name: Build and push inventory-service image
+      uses: docker/build-push-action@v4
+      with:
+        context: ./inventory-services
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: schwifty101/cafe-inventory-service:latest
+
+    - name: Build and push customer-service image
+      uses: docker/build-push-action@v4
+      with:
+        context: ./customer-services
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: schwifty101/cafe-customer-service:latest

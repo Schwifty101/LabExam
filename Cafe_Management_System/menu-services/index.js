@@ -10,7 +10,7 @@ const connectMongo = async () => {
   let retries = 5;
   while (retries > 0) {
     try {
-      await mongoose.connect('mongodb://mongodb:27017/cafe');
+      await mongoose.connect('mongodb://mongo:27017/cafe');
       console.log('Menu Service connected to MongoDB');
       break;
     } catch (error) {
@@ -75,3 +75,14 @@ app.get('/menu/:id', async (req, res) => {
 app.listen(port, () => {
   console.log(`Menu Service running on port ${port}`);
 });
+
+/*
+DONE: containerize each microservice and the API gateway using Docker file. Each dockerfile should
+define the environment setup confi. This ensures the microservices are portable and can be deployed consistenly accros various environments.
+
+implment CI/CD automation using github actions. Create workflow of files that automatically build docker 
+imahes for each service whenever changes are pushed to the main branch. Handle, checking out code,
+setting up build env, loggin in to docker, building images and pushing them to the registry.
+
+
+*/

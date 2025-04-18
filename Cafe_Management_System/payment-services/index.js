@@ -7,7 +7,7 @@ const port = 3003;
 app.use(express.json());
 
 // MongoDB connection
-mongoose.connect('mongodb://mongodb:27017/cafe', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://mongo:27017/cafe', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Payment Service connected to MongoDB'))
   .catch(err => console.error('MongoDB connection error:', err));
 

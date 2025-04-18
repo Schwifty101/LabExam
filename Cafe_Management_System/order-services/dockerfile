@@ -1,0 +1,16 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3002
+
+ENV NODE_ENV=production
+ENV MONGO_URI=mongodb://mongo:27017/cafe
+
+CMD ["node", "index.js"]

@@ -11,7 +11,7 @@ const connectMongo = async () => {
   let retries = 5;
   while (retries > 0) {
     try {
-      await mongoose.connect('mongodb://mongodb:27017/cafe');
+      await mongoose.connect('mongodb://mongo:27017/cafe');
       console.log('Order Service connected to MongoDB');
       break;
     } catch (error) {
